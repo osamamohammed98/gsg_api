@@ -1,4 +1,28 @@
-class User {
+class Comment {
+  String productId;
+  String comment;
+  CommentUser user;
+
+  Comment({this.productId, this.comment, this.user});
+
+  Comment.fromJson(Map<String, dynamic> json) {
+    productId = json['productId'];
+    comment = json['comment'];
+    user = json['user'] != null ? new CommentUser.fromJson(json['user']) : null;
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['productId'] = this.productId;
+    data['comment'] = this.comment;
+    if (this.user != null) {
+      data['user'] = this.user.toJson();
+    }
+    return data;
+  }
+}
+
+class CommentUser {
   String sId;
   String username;
   String email;
@@ -20,7 +44,7 @@ class User {
   String licenseUrl;
   String companyType;
 
-  User(
+  CommentUser(
       {this.sId,
       this.username,
       this.email,
@@ -42,7 +66,7 @@ class User {
       this.licenseUrl,
       this.companyType});
 
-  User.fromJson(Map<String, dynamic> json) {
+  CommentUser.fromJson(Map<String, dynamic> json) {
     sId = json['_id'];
     username = json['username'];
     email = json['email'];
